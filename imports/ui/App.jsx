@@ -16,10 +16,11 @@ class App extends Component {
     // Find the text field via the React ref
     const firstName = ReactDOM.findDOMNode(this.refs.firstName).value.trim();
     const lastName = ReactDOM.findDOMNode(this.refs.lastName).value.trim();
- 
+    const laneTitle = 'completed';
     Contacts.insert({
       firstName,
       lastName,
+      laneTitle,
       createdAt: new Date(), // current time
     });
  
@@ -28,8 +29,11 @@ class App extends Component {
     ReactDOM.findDOMNode(this.refs.lastName).value = '';
 
   }
-  renderContacts() {
-    return this.props.contacts.map((contact) => (
+  renderContacts(filterTitle) {
+    if(typeof filterTitle == "undefined"){
+      return false;
+    }
+    return this.props[filterTitle].map((contact) => (
       <Contact key={contact._id} contact={contact} />
     ));
   }
@@ -59,9 +63,14 @@ class App extends Component {
         </header>
 
         <ul>
-          {this.renderContacts()}
+          
         </ul>
-        <Lane />
+        <ul>
+         <li><Lane title="new"/>{this.renderContacts("new")}</li>
+         <li><Lane title="in progress"/>{this.renderContacts("in progress")}</li>
+         <li><Lane title="completed"/>{this.renderContacts("in progress")}</li>
+
+        </ul>
       </div>
     );
   }
@@ -74,5 +83,8 @@ App.propTypes = {
 export default createContainer(() => {
   return {
     contacts: Contacts.find({}).fetch(),
+    new : Contacts.find({laneTitle : 'new'}).fetch(),
+    'in progress' : Contacts.find({laneTitle : 'in progress'}).fetch(),
+    'completed' : Contacts.find({laneTitle : "completed"}).fetch()
   };
 }, App);

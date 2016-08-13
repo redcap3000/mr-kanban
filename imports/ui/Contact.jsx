@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Lanes } from '../api/lanes.js';
 import { Contacts } from '../api/contacts.js';
 
 export default class Contact extends Component {
@@ -11,19 +12,16 @@ export default class Contact extends Component {
   deleteThisContact() {
     Contacts.remove(this.props.contact._id);
   }
-
-  changeLane(e){
-    if (e.target.value != ''){
-      if(Contacts.update(this.props.contact._id, {
-        $set: { laneTitle: e.target.value }
-        })){
-        return true;
-      }else{
-        alert("Something went wrong.");
-      }
+ 
+  drop(e) {
+    e.preventDefault();
+    var lane = Lanes.findOne();
+    if(lane && lane.contact != this.props.contact._id){
+      // I should be using state object
+      Lanes.update(lane._id,{ $set : {contact : this.props.contact._id }});
     }
-    return false;
   }
+
   changeFirstName(e){
     if (e.target.value != ''){
       if(Contacts.update(this.props.contact._id, {
@@ -51,7 +49,7 @@ export default class Contact extends Component {
   render() {
     const contactClassName = this.props.contact.checked ? 'checked' : '';
     return (
-      <li className={contactClassName}>
+      <li draggable='true' className={contactClassName} onDrag={this.drop.bind(this)}>
         <button className="delete" onClick={this.deleteThisContact.bind(this)}>
           &times;
         </button>
@@ -80,14 +78,6 @@ export default class Contact extends Component {
               value={this.props.contact.lastName}
               onChange={this.changeLastName.bind(this)}
             />
-            <select ref="lane" onChange={this.changeLane.bind(this)}>
-              <option value=''>Change Lane</option>
-              <option>new</option>
-              <option>in progress</option>
-              <option>completed</option>
-            </select>
-            
-
       </li>
     );
   }

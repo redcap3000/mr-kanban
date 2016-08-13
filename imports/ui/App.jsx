@@ -68,9 +68,9 @@ class App extends Component {
         </header>
 
         <ul>
-         <Lane title="new"/>{this.renderContacts("new")}
-         <Lane title="in progress"/>{this.renderContacts("in progress")}
-         <Lane title="completed"/>{this.renderContacts("completed")}
+         <Lane title="new" content={this.renderContacts("new")} />
+         <Lane title="in progress" content={this.renderContacts("in progress")}/>
+         <Lane title="completed" content={this.renderContacts("completed")}/>
         </ul>
       </div>
     );

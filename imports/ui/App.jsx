@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Tasks } from '../api/tasks.js';
+import { Contacts } from '../api/contacts.js';
 
-import Task from './Task.jsx';
+import Contact from './Contact.jsx';
 
 // App component - represents the whole app
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
     // Find the text field via the React ref
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
  
-    Tasks.insert({
+    Contacts.insert({
       text,
       createdAt: new Date(), // current time
     });
@@ -22,9 +22,9 @@ class App extends Component {
     // Clear form
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
   }
-  renderTasks() {
-    return this.props.tasks.map((task) => (
-      <Task key={task._id} task={task} />
+  renderContacts() {
+    return this.props.contacts.map((contact) => (
+      <Contact key={contact._id} task={contact} />
     ));
   }
 
@@ -32,19 +32,19 @@ class App extends Component {
     return (
       <div className="container">
         <header>
-          <h1>Todo List</h1>
+          <h1>Contacts Board</h1>
 
-          <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+          <form className="new-contact" onSubmit={this.handleSubmit.bind(this)} >
             <input
               type="text"
               ref="textInput"
-              placeholder="Type to add new tasks"
+              placeholder="Type to add new contacts"
             />
           </form>
         </header>
 
         <ul>
-          {this.renderTasks()}
+          {this.renderContacts()}
         </ul>
       </div>
     );
@@ -52,11 +52,11 @@ class App extends Component {
 }
 
 App.propTypes = {
-  tasks: PropTypes.array.isRequired,
+  contacts: PropTypes.array.isRequired,
 };
 
 export default createContainer(() => {
   return {
-    tasks: Tasks.find({}).fetch(),
+    contacts: Contacts.find({}).fetch(),
   };
 }, App);

@@ -9,22 +9,27 @@ import Contact from './Contact.jsx';
 // App component - represents the whole app
 class App extends Component {
   handleSubmit(event) {
+    console.log("submitted");
     event.preventDefault();
  
     // Find the text field via the React ref
-    const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    const firstName = ReactDOM.findDOMNode(this.refs.firstName).value.trim();
+    const lastName = ReactDOM.findDOMNode(this.refs.lastName).value.trim();
  
     Contacts.insert({
-      text,
+      firstName,
+      lastName,
       createdAt: new Date(), // current time
     });
  
     // Clear form
-    ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    ReactDOM.findDOMNode(this.refs.firstName).value = '';
+    ReactDOM.findDOMNode(this.refs.lastName).value = '';
+
   }
   renderContacts() {
     return this.props.contacts.map((contact) => (
-      <Contact key={contact._id} task={contact} />
+      <Contact key={contact._id} contact={contact} />
     ));
   }
 
@@ -37,8 +42,16 @@ class App extends Component {
           <form className="new-contact" onSubmit={this.handleSubmit.bind(this)} >
             <input
               type="text"
-              ref="textInput"
-              placeholder="Type to add new contacts"
+              ref="firstName"
+              placeholder="First Name"
+            />
+             <input
+              type="text"
+              ref="lastName"
+              placeholder="Last Name"
+            />
+             <input
+              type="submit"
             />
           </form>
         </header>

@@ -16,7 +16,7 @@ class App extends Component {
     // Find the text field via the React ref
     const firstName = ReactDOM.findDOMNode(this.refs.firstName).value.trim();
     const lastName = ReactDOM.findDOMNode(this.refs.lastName).value.trim();
-    const laneTitle = 'completed';
+    const laneTitle = ReactDOM.findDOMNode(this.refs.lane).value.trim();;
     Contacts.insert({
       firstName,
       lastName,
@@ -56,6 +56,11 @@ class App extends Component {
               ref="lastName"
               placeholder="Last Name"
             />
+            <select ref="lane">
+              <option>new</option>
+              <option>in progress</option>
+              <option>completed</option>
+            </select>
              <input
               type="submit"
             />
@@ -63,13 +68,9 @@ class App extends Component {
         </header>
 
         <ul>
-          
-        </ul>
-        <ul>
-         <li><Lane title="new"/>{this.renderContacts("new")}</li>
-         <li><Lane title="in progress"/>{this.renderContacts("in progress")}</li>
-         <li><Lane title="completed"/>{this.renderContacts("in progress")}</li>
-
+         <Lane title="new"/>{this.renderContacts("new")}
+         <Lane title="in progress"/>{this.renderContacts("in progress")}
+         <Lane title="completed"/>{this.renderContacts("completed")}
         </ul>
       </div>
     );

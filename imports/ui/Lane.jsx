@@ -16,9 +16,7 @@ export default class Lane extends Component {
     //const laneClassName = this.props.lane.id;
     var title = 'Lane 1'
     return (
-        <div>
-          <h1>{this.props.title}</h1>
-        </div>
+          <li><h1>{this.props.title}</h1></li>
     );
   }
 }

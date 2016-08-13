@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Contacts } from '../api/contacts.js';
-
+import { Lanes } from '../api/lanes.js';
+import Lane from './Lane.jsx';
 import Contact from './Contact.jsx';
 
 // App component - represents the whole app
@@ -34,6 +35,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this);
     return (
       <div className="container">
         <header>
@@ -59,13 +61,14 @@ class App extends Component {
         <ul>
           {this.renderContacts()}
         </ul>
+        <Lane />
       </div>
     );
   }
 }
 
 App.propTypes = {
-  contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.array.isRequired
 };
 
 export default createContainer(() => {

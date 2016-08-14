@@ -83,8 +83,8 @@ ul {
 li {
   position: relative;
   list-style: none;
-  padding: 15px;
-  border-bottom: #eee solid 1px;
+  padding: 5px 10px;
+  border-bottom: #eee solid 3px;
 }
  
 li .text {
@@ -129,9 +129,6 @@ header .hide-completed {
   }
 }
 
-input.submit{
-  float:right;
-}
 input.firstN,input.lastN{
   width:50%;
   float:left;

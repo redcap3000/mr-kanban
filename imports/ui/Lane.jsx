@@ -30,7 +30,7 @@ export default class Lane extends Component {
   }
   render() {
     return (
-          <li onDragOver={this.dragOverLane.bind(this)} onDrop={this.drop.bind(this)}>
+          <li className="lane" onDragOver={this.dragOverLane.bind(this)} onDrop={this.drop.bind(this)}>
             <h2>{this.props.title}</h2>
             <ul>{this.props.content}</ul>
           </li>

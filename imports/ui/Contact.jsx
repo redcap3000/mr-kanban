@@ -10,23 +10,16 @@ export default class Contact extends Component {
       }
     };
   }
-  toggleChecked() {
-    Contacts.update(this.props.contact._id, {
-      $set: { checked: !this.props.contact.checked }
-    });
-  }
-
   deleteThisContact() {
     Contacts.remove(this.props.contact._id);
   }
- 
-  drop(e) {
+  drag(e) {
     e.preventDefault();
     var lane = Lanes.findOne();
     if(lane && lane.contact != this.props.contact._id){
       // I should be using state object
       this.setState({contact : this.props.contact._id});
-      this.setState({editorStyle :  { 'display' : 'block' } });
+      this.setState({editorStyle :  { 'display' : 'none' } });
       console.log(this.state);
       Lanes.update(lane._id,{ $set : {contact : this.props.contact._id }});
     }
@@ -69,15 +62,7 @@ export default class Contact extends Component {
   render() {
     const contactClassName = this.props.contact.checked ? 'checked' : '';
     return (
-      <li onContextMenu={this.showContextMenu.bind(this)} draggable='true' className={contactClassName} onDrag={this.drop.bind(this)}>
-        
-        <input
-          type="checkbox"
-          readOnly
-          checked={this.props.contact.checked}
-          onClick={this.toggleChecked.bind(this)}
-        />
-        
+      <li onContextMenu={this.showContextMenu.bind(this)} draggable='true' className={contactClassName} onDrag={this.drag.bind(this)}>
         <span className="text">{this.props.contact.firstName}</span>
         <span className="text">{this.props.contact.lastName}</span>
         <div className="editor" style={this.state.editorStyle}>

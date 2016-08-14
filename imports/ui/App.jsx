@@ -10,9 +10,7 @@ import Contact from './Contact.jsx';
 // App component - represents the whole app
 class App extends Component {
   handleSubmit(event) {
-    console.log("submitted");
     event.preventDefault();
- 
     // Find the text field via the React ref
     const firstName = ReactDOM.findDOMNode(this.refs.firstName).value.trim();
     const lastName = ReactDOM.findDOMNode(this.refs.lastName).value.trim();
@@ -23,7 +21,6 @@ class App extends Component {
       laneTitle,
       createdAt: new Date(), // current time
     });
- 
     // Clear form
     ReactDOM.findDOMNode(this.refs.firstName).value = '';
     ReactDOM.findDOMNode(this.refs.lastName).value = '';
@@ -37,9 +34,7 @@ class App extends Component {
       <Contact key={contact._id} contact={contact} />
     ));
   }
-
   render() {
-    console.log(this);
     return (
       <div className="container">
         <header>
@@ -84,6 +79,6 @@ export default createContainer(() => {
     contacts: Contacts.find({}).fetch(),
     new : Contacts.find({laneTitle : 'new'}).fetch(),
     'in progress' : Contacts.find({laneTitle : 'in progress'}).fetch(),
-    'completed' : Contacts.find({laneTitle : "completed"}).fetch()
+    'completed' : Contacts.find({laneTitle : 'completed'}).fetch()
   };
 }, App);

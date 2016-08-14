@@ -1,8 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { Lanes } from '../api/lanes.js';
 import { Contacts } from '../api/contacts.js';
-
 export default class Contact extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      editorStyle : {
+        'display' : 'none'
+      }
+    };
+  }
   toggleChecked() {
     Contacts.update(this.props.contact._id, {
       $set: { checked: !this.props.contact.checked }
@@ -18,10 +25,23 @@ export default class Contact extends Component {
     var lane = Lanes.findOne();
     if(lane && lane.contact != this.props.contact._id){
       // I should be using state object
+      this.setState({contact : this.props.contact._id});
+      this.setState({editorStyle :  { 'display' : 'block' } });
+      console.log(this.state);
       Lanes.update(lane._id,{ $set : {contact : this.props.contact._id }});
     }
   }
-
+  showContextMenu(e){
+    e.preventDefault();
+    this.setState({editorStyle :  { 'display' : 'block' } });
+    return false;
+  }
+  // attempting to figure out graceful way to hide editor once shown
+  // ideally if another editor is present then hide all others  
+  hideEditor(e){
+    this.setState({editorStyle :  { 'display' : 'none' } });
+    return true;
+  }
   changeFirstName(e){
     if (e.target.value != ''){
       if(Contacts.update(this.props.contact._id, {
@@ -49,11 +69,8 @@ export default class Contact extends Component {
   render() {
     const contactClassName = this.props.contact.checked ? 'checked' : '';
     return (
-      <li draggable='true' className={contactClassName} onDrag={this.drop.bind(this)}>
-        <button className="delete" onClick={this.deleteThisContact.bind(this)}>
-          &times;
-        </button>
-
+      <li onContextMenu={this.showContextMenu.bind(this)} draggable='true' className={contactClassName} onDrag={this.drop.bind(this)}>
+        
         <input
           type="checkbox"
           readOnly
@@ -63,7 +80,7 @@ export default class Contact extends Component {
         
         <span className="text">{this.props.contact.firstName}</span>
         <span className="text">{this.props.contact.lastName}</span>
-
+        <div className="editor" style={this.state.editorStyle}>
             <input
               type="text"
               ref="firstName"
@@ -78,6 +95,12 @@ export default class Contact extends Component {
               value={this.props.contact.lastName}
               onChange={this.changeLastName.bind(this)}
             />
+            <button onClick={this.hideEditor.bind(this)}>Hide</button>
+            <button className="delete" onClick={this.deleteThisContact.bind(this)}>
+              &times;
+            </button>
+
+        </div>
       </li>
     );
   }

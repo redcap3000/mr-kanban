@@ -6,12 +6,9 @@ import Contact from './Contact.jsx';
 import ReactDOM from 'react-dom';
 
 export default class Lane extends Component {
-  constructor(props){
+  constructor (props) {
     super(props);
-    console.log(Lanes.findOne());
-    Lanes.insert({title:''});
-      console.log(Lanes.findOne());
-
+    Lanes.insert({title : ' '});
   }
    dragOverLane(e){
     var lane = Lanes.findOne();
@@ -34,13 +31,12 @@ export default class Lane extends Component {
   render() {
     return (
           <li onDragOver={this.dragOverLane.bind(this)} onDrop={this.drop.bind(this)}>
-            <h1>{this.props.title}</h1>
+            <h2>{this.props.title}</h2>
             <ul>{this.props.content}</ul>
           </li>
     );
   }
 }
-
 Lane.propTypes = {
   title: PropTypes.string.isRequired,
 };

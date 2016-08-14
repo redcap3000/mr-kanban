@@ -15,7 +15,7 @@ body {
  
   font-size: 14px;
 }
- 
+
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -23,13 +23,16 @@ body {
   background: white;
 }
  
-header {
+header,footer {
   background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
   padding: 20px 15px 15px 15px;
   position: relative;
 }
- 
+footer{
+  background-image: linear-gradient(to top, #d0edf5, #e1e5f0 100%);
+}
+
 #login-buttons {
   display: block;
 }
@@ -108,7 +111,9 @@ header .hide-completed {
 .toggle-private {
   margin-left: 5px;
 }
- 
+.editor{
+  float:left;
+}
 @media (max-width: 600px) {
   li {
     padding: 12px 15px;
@@ -122,4 +127,12 @@ header .hide-completed {
   .new-contact input {
     padding-bottom: 5px;
   }
+}
+
+input.submit{
+  float:right;
+}
+input.firstN,input.lastN{
+  width:50%;
+  float:left;
 }

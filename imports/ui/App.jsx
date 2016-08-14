@@ -16,7 +16,7 @@ class App extends Component {
     // Find the text field via the React ref
     const firstName = ReactDOM.findDOMNode(this.refs.firstName).value.trim();
     const lastName = ReactDOM.findDOMNode(this.refs.lastName).value.trim();
-    const laneTitle = ReactDOM.findDOMNode(this.refs.lane).value.trim();;
+    const laneTitle = 'new';
     Contacts.insert({
       firstName,
       lastName,
@@ -44,34 +44,32 @@ class App extends Component {
       <div className="container">
         <header>
           <h1>Contacts Board</h1>
-
-          <form className="new-contact" onSubmit={this.handleSubmit.bind(this)} >
-            <input
-              type="text"
-              ref="firstName"
-              placeholder="First Name"
-            />
-             <input
-              type="text"
-              ref="lastName"
-              placeholder="Last Name"
-            />
-            <select ref="lane">
-              <option>new</option>
-              <option>in progress</option>
-              <option>completed</option>
-            </select>
-             <input
-              type="submit"
-            />
-          </form>
         </header>
-
         <ul>
          <Lane title="new" content={this.renderContacts("new")} />
          <Lane title="in progress" content={this.renderContacts("in progress")}/>
          <Lane title="completed" content={this.renderContacts("completed")}/>
         </ul>
+        <footer>
+          <h1>Add contact</h1>
+          <form className="new-contact" onSubmit={this.handleSubmit.bind(this)} >
+              <input
+                className="firstN"
+                type="text"
+                ref="firstName"
+                placeholder="First Name"
+              />
+               <input
+               className="lastN"
+                type="text"
+                ref="lastName"
+                placeholder="Last Name"
+              />
+               <input
+                type="submit" value="Create"
+              />
+            </form>
+        </footer>
       </div>
     );
   }

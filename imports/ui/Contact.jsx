@@ -24,7 +24,7 @@ export default class Contact extends Component {
       Lanes.update(lane._id,{ $set : {contact : this.props.contact._id }});
     }
   }
-  showContextMenu(e){
+  showEditor(e){
     e.preventDefault();
     this.setState({editorStyle :  { 'display' : 'block' } });
     return false;
@@ -61,8 +61,9 @@ export default class Contact extends Component {
   }
   render() {
     const contactClassName = this.props.contact.checked ? 'checked' : '';
+    console.log(this.props.contact);
     return (
-      <div onContextMenu={this.showContextMenu.bind(this)} draggable='true' className={contactClassName} onDrag={this.drag.bind(this)}>
+      <div contextMenu={this.props.contact._id+'_context'} draggable='true' className={contactClassName} onDrag={this.drag.bind(this)}>
         <span className="text">{this.props.contact.firstName}</span>
         <span className="text">{this.props.contact.lastName}</span>
         <div className="editor" style={this.state.editorStyle}>
@@ -86,6 +87,10 @@ export default class Contact extends Component {
             </button>
 
         </div>
+        <menu type="context" id={this.props.contact._id+'_context'}>
+          <menuitem label="Delete Contact" onClick={this.deleteThisContact.bind(this)}></menuitem>
+          <menuitem label="Edit Contact" onClick={this.showEditor.bind(this)}></menuitem>
+        </menu>
       </div>
     );
   }

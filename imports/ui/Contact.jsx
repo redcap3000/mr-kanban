@@ -62,7 +62,7 @@ export default class Contact extends Component {
   render() {
     const contactClassName = this.props.contact.checked ? 'checked' : '';
     return (
-      <li onContextMenu={this.showContextMenu.bind(this)} draggable='true' className={contactClassName} onDrag={this.drag.bind(this)}>
+      <div onContextMenu={this.showContextMenu.bind(this)} draggable='true' className={contactClassName} onDrag={this.drag.bind(this)}>
         <span className="text">{this.props.contact.firstName}</span>
         <span className="text">{this.props.contact.lastName}</span>
         <div className="editor" style={this.state.editorStyle}>
@@ -86,7 +86,7 @@ export default class Contact extends Component {
             </button>
 
         </div>
-      </li>
+      </div>
     );
   }
 }

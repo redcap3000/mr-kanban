@@ -4,20 +4,11 @@ body {
   background-image: linear-gradient(to bottom, #315481, #918e82 100%);
   background-attachment: fixed;
  
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
- 
-  padding: 0;
-  margin: 0;
- 
+
   font-size: 14px;
 }
 
 .container {
-  max-width: 600px;
   margin: 0 auto;
   min-height: 100%;
   background: white;
@@ -27,10 +18,11 @@ header,footer {
   background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
   padding: 20px 15px 15px 15px;
-  position: relative;
+  //position: relative;
 }
 footer{
   background-image: linear-gradient(to top, #d0edf5, #e1e5f0 100%);
+  clear:both;
 }
 
 #login-buttons {
@@ -65,12 +57,13 @@ form {
   outline: 0;
 }
  
-ul {
-  margin: 0;
-  padding: 0;
-  background: white;
+.lane{
+  float:left;
+  width:30%;
+  margin:1%;
+  text-align:center;
 }
- 
+
 .delete {
   float: right;
   font-weight: bold;

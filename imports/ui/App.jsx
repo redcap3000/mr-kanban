@@ -40,11 +40,10 @@ class App extends Component {
         <header>
           <h1>Contacts Board</h1>
         </header>
-        <ul>
-         <Lane title="new" content={this.renderContacts("new")} />
-         <Lane title="in progress" content={this.renderContacts("in progress")}/>
-         <Lane title="completed" content={this.renderContacts("completed")}/>
-        </ul>
+        
+        <Lane title="new" content={this.renderContacts("new")} />
+        <Lane title="in progress" content={this.renderContacts("in progress")}/>
+        <Lane title="completed" content={this.renderContacts("completed")}/>
         <footer>
           <h1>Add contact</h1>
           <form className="new-contact" onSubmit={this.handleSubmit.bind(this)} >

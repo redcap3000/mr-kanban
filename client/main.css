@@ -136,3 +136,6 @@ input.firstN,input.lastN{
   float:left;
   clear: both;
 }
+.text{
+  padding-left:4px;
+}

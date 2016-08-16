@@ -62,6 +62,7 @@ form {
   width:30%;
   margin:1%;
   text-align:center;
+  padding-bottom:8px;
 }
 
 .delete {
@@ -104,9 +105,7 @@ header .hide-completed {
 .toggle-private {
   margin-left: 5px;
 }
-.editor{
-  float:left;
-}
+
 @media (max-width: 600px) {
   li {
     padding: 12px 15px;
@@ -125,4 +124,15 @@ header .hide-completed {
 input.firstN,input.lastN{
   width:50%;
   float:left;
+}
+.editor{
+  border:solid gray 3px;
+  padding:4px;
+  display:absolute;
+  top:0;
+  float:left;
+}
+.editor input, .editor button{
+  float:left;
+  clear: both;
 }
